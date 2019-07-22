@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: local-gateway
+spec:
+  hosts:
+  - "localhost"
+  gateways:
+  - local-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /httptrigger1
+    route:
+    - destination:
+        port:
+          number: 80
+        host: httptrigger1-http
+  - match:
+    - uri:
+        prefix: /httptrigger2
+    route:
+    - destination:
+        port:
+          number: 80
+        host: httptrigger2-http
+  - match:
+    - uri:
+        prefix: /httptrigger3
+    route:
+    - destination:
+        port:
+          number: 80
+        host: httptrigger3-http
+  - match:
+    - uri:
+        prefix: /httptrigger4
+    route:
+    - destination:
+        port:
+          number: 80
+        host: httptrigger4-http

@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: http-retries
+spec:
+  hosts:
+  - httptrigger3-http
+  http:
+  - match:
+    - uri:
+      prefix: "/api/Trigger1"
+    route:
+    - destination:
+        host: httptrigger3-http
+  - route:
+    - destination:
+        host: httptrigger3-http
+    fault:
+      abort:
+        percentage:
+          value: 100
+        httpStatus: 400
+    retries:
+      attempts: 3
+      perTryTimeout: 2s

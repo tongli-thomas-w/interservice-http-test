@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: http-rewrite
+spec:
+  hosts:
+  - httptrigger3-http
+  http:
+  - match:
+    - uri:
+        prefix: /api/Trigger1
+    rewrite:
+      uri: /api/Trigger2
+    route:
+    - destination:
+        host: httptrigger3-http

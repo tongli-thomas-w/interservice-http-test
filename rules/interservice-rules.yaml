@@ -1,0 +1,21 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: interservice-rules
+spec:
+  hosts:
+    - httptrigger2-http
+  gateways: ~
+  http:
+    - match:
+        - uri:
+            prefix: /api/Trigger2
+      retries:
+        attempts: 4
+        retryOn: gateway-error
+      route:
+        - destination:
+            host: httptrigger2-http
+    - route:
+        - destination:
+            host: httptrigger2-http

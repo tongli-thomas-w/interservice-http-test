@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: http-redirect
+spec:
+  hosts:
+  - httptrigger3-http
+  http:
+  - match:
+    - uri:
+        exact: /api/Trigger1
+    redirect:
+      uri: /api/Trigger2
+      authority: httptrigger3-http
